@@ -1,7 +1,5 @@
 import io
 import sys
-from itertools import count
-
 import chess.pgn
 import time
 import numpy as np
@@ -13,8 +11,6 @@ def tournament_counter():
     reader=io.StringIO(chessgamedata)
     tournamentcount=0
     start = time.time()
-    is_present = lambda x : "tournament" in x.headers.get("Event")
-    vec_is_present = np.vectorize(is_present)
     while True:
         game = chess.pgn.read_game(reader)
         if game is None:

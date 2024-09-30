@@ -5,7 +5,7 @@ import time
 import numpy as np
 
 
-def tournament_counter(pgn_file):
+def tournament_counter():
     all_games_states = np.array([])
     chessgamedata = sys.stdin.read()
     reader=io.StringIO(chessgamedata)
@@ -26,5 +26,4 @@ def tournament_counter(pgn_file):
     start = time.time()
 
 
-pgn_file = "/Users/vishnudvardhan/Downloads/lichess_db_antichess_rated_2024-08.pgn"
-tournament_counter(pgn_file)
+tournament_counter()

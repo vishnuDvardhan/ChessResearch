@@ -1,5 +1,7 @@
 import io
 import sys
+from itertools import count
+
 import chess.pgn
 import time
 import numpy as np
@@ -19,11 +21,12 @@ def tournament_counter():
             break
         if "tournament" in game.headers.get("Event"):
             tournamentcount=tournamentcount+1
+            print(game.headers.get("Event"),tournamentcount)
+
         np.append(all_games_states,game)
     end = time.time()
     print(" time taken is ",end-start)
     print(tournamentcount)
-    start = time.time()
 
 
 tournament_counter()

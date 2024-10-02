@@ -1,28 +1,37 @@
 import io
 import sys
+import threading
 import chess.pgn
 import time
 import numpy as np
 
+tournamentcount = 0
+lock = threading.Lock()
+chessgamedata = sys.stdin.read()
+reader=io.StringIO(chessgamedata)
 
 def tournament_counter():
-    all_games_states = np.array([])
-    chessgamedata = sys.stdin.read()
-    reader=io.StringIO(chessgamedata)
-    tournamentcount=0
-    start = time.time()
-    while True:
-        game = chess.pgn.read_game(reader)
-        if game is None:
-            break
-        if "tournament" in game.headers.get("Event"):
-            tournamentcount=tournamentcount+1
+    global tournamentcount
+    with lock:
+        while True:
+            game = chess.pgn.read_game(reader)
+            if game is None:
+                break
+            if "tournament" in game.headers.get("Event"):
+                tournamentcount=tournamentcount+1
             print(game.headers.get("Event"),tournamentcount)
 
-        np.append(all_games_states,game)
-    end = time.time()
-    print(" time taken is ",end-start)
-    print(tournamentcount)
 
+threadPool=[]
+num_threads=16
+start = time.time()
 
-tournament_counter()
+for i in range(num_threads):
+    threadPool.append(threading.Thread(target=tournament_counter))
+for thread in threadPool:
+    thread.start()
+for thread in threadPool:
+    thread.join()
+end = time.time()
+print(" time taken is ", end - start)
+print(tournamentcount)

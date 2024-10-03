@@ -12,15 +12,14 @@ def tournament_counter():
     pattern2 =re.compile(r"(\w+)\s+tournament")
     for line in sys.stdin:
         if (pattern1.match(line)):
-            tournamentcount=tournamentcount+1
-            type=pattern2.search(r"(\w+)\s+tournament",line).group(1)
+            tournamentcount+=tournamentcount
+            type=pattern2.search(line).group(1)
             counts[type]+=1
-            file.write(f"Blitz:{counts['Blitz']},Bullet:{counts['Bullet']},Rapid:{counts['Rapid']},UltraBullet:{counts['UltraBullet']},Classical:{counts['Classical']},")
-            file.write(f"{line} ,{tournamentcount}\n")
     end = time.time()
     file.write(f" time taken is {end-start}\n")
-    file.write(f"{counts}")
-    file.write(tournamentcount)
+    file.write(f"{counts}\n")
+    file.write(f"{tournamentcount}\n")
+    file.close()
 
 
 tournament_counter()

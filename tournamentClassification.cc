@@ -3,11 +3,15 @@
 #include <string>
 #include <map>
 #include <chrono>
+#include <fstream>
 
 using namespace std;
 
 void tournament_counter() {
-    map<string, int> counts = {
+    ofstream file("out-cp.txt");
+
+    map<string, int> counts =
+     {
         {"Blitz", 0}, {"Bullet", 0}, {"Rapid", 0}, {"UltraBullet", 0}, {"Classical", 0}
     };
     int tournament_count = 0;
@@ -31,12 +35,17 @@ void tournament_counter() {
 
     auto end = chrono::high_resolution_clock::now();
     chrono::duration<double> elapsed = end - start;
-    cout << "Time taken is: " << elapsed.count() << " seconds\n";
-    cout << "Tournament counts:\n";
-    for (const auto& pair : counts) {
-        cout << pair.first << ": " << pair.second << "\n";
+    if(file.is_open())
+    {
+        file << "Time taken is: " << elapsed.count() << " seconds\n";
+        file << "Tournament counts:\n";
+        for (const auto& pair : counts) {
+            file << pair.first << ": " << pair.second << "\n";
+        }
+        file << "Total tournaments: " << tournament_count << "\n";
+        file.close();
     }
-    cout << "Total tournaments: " << tournament_count << "\n";
+    
 }
 
 int main() {

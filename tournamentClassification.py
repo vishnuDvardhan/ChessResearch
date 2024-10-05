@@ -3,7 +3,7 @@ import sys
 import re
 import time
 import numpy as np
-file = open('out.txt','w')
+file = open('out-py.txt','w')
 def tournament_counter():
     counts={"Blitz":0,"Bullet":0,"Rapid":0,"UltraBullet":0,"Classical":0}
     tournamentcount=0

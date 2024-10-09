@@ -12,7 +12,7 @@ def tournament_counter():
     pattern2 =re.compile(r"(\w+)\s+tournament")
     for line in sys.stdin:
         if (pattern1.match(line)):
-            tournamentcount+=tournamentcount
+            tournamentcount+=1
             type=pattern2.search(line).group(1)
             counts[type]+=1
     end = time.time()

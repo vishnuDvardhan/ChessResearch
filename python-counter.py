@@ -22,7 +22,7 @@ tournament_counts.update({
 number_of_tournaments = 0
 
 # Open the input and output files
-with open(filename, 'r') as file, open("out-c.txt", 'w') as outfile:
+with open(filename, 'r') as file, open("out-p.txt", 'w') as outfile:
     start = time.time()  # Start the timer
     line_count = 0
 

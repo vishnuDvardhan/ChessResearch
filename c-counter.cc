@@ -11,7 +11,7 @@ int main() {
     map<string, int> tournament_counts = { { "Blitz_tournaments", 0 }, { "Bullet_tournaments", 0 }, { "Rapid_tournaments", 0 },
         { "UltraBullet_tournaments", 0 }, { "Classical_tournaments", 0 },{ "Blitz_non_tournaments", 0 }, { "Bullet_non_tournaments", 0 }, { "Rapid_non_tournaments", 0 },
         { "UltraBullet_non_tournaments", 0 }, { "Classical_non_tournaments", 0 } };
-    int number_of_tournaments;
+    int number_of_tournaments = 0;
     std::cout << "Enter the file name: ";
     std::cin >> filename;
     std::cout << filename << "\n";
@@ -57,7 +57,7 @@ int main() {
                     tournament_counts["Blitz_non_tournaments"]++;
                     continue;
                 }
-                else if (line.find("Bullet") != string::npos) {
+                else if (line.find(" Bullet") != string::npos) {
                     tournament_counts["Bullet_non_tournaments"]++;
                     continue;
                 }
